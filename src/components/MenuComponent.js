@@ -3,8 +3,6 @@ import {
   Card,
   CardImg,
   CardImgOverlay,
-  CardText,
-  CardBody,
   CardTitle,
 } from "reactstrap";
 import DishDetail from "./DishdetailComponent";
@@ -26,7 +24,6 @@ class Menu extends Component {
 
   render() {
     const menu = this.props.dishes.map((d) => {
-      console.log(d)
       return (
         <div key={d.id} className="col-12 col-md-5 m-1">
           <Card onClick={() => this.onDishSelect(d)}>

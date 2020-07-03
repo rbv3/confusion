@@ -26,9 +26,8 @@ class DishDetail extends Component {
   }
 
   renderComments(comments) {
-    console.log(comments);
     var c;
-    if (comments)
+    if (comments) {
       c = comments.map((x) => {
         return (
           <div key={x.id}>
@@ -39,17 +38,15 @@ class DishDetail extends Component {
           </div>
         );
       });
-    if (comments)
       return (
         <div>
           <h4>Comments</h4>
           <div>{c}</div>
         </div>
       );
-    else  
-        return (
-          <div></div>
-        )
+    } else {
+      return <div></div>;
+    }
   }
 
   render() {
