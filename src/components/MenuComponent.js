@@ -9,13 +9,13 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-function RenderMenuItem({ d }) {
+function RenderMenuItem({ dish }) {
   return (
     <Card>
-      <Link to={`/menu/${d.id}`}>
-        <CardImg width="100%" object src={d.image} alt={d.name} />
+      <Link to={`/menu/${dish.id}`}>
+        <CardImg width="100%" object src={dish.image} alt={dish.name} />
         <CardImgOverlay>
-          <CardTitle>{d.name}</CardTitle>
+          <CardTitle>{dish.name}</CardTitle>
         </CardImgOverlay>
       </Link>
     </Card>
@@ -26,7 +26,7 @@ const Menu = (props) => {
   const menu = props.dishes.map((d) => {
     return (
       <div key={d.id} className="col-12 col-md-5 m-1">
-        <RenderMenuItem d={d} />
+        <RenderMenuItem dish={d} />
       </div>
     );
   });
