@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 const maxLength = (len) => (val) => !(val) || (val?.length <= len);
 const minLength = (len) => (val) => val && (val?.length >= len);
@@ -26,13 +27,18 @@ const minLength = (len) => (val) => val && (val?.length >= len);
 function RenderDish({ dish }) {
   if (dish != null) {
     return (
-      <Card>
-        <CardImg width="100%" object src={baseUrl + dish.image} alt={dish.name} />
-        <CardBody>
-          <CardTitle>{dish.name}</CardTitle>
-          <CardText>{dish.description}</CardText>
-        </CardBody>
-      </Card>
+      <FadeTransform in
+        transformProps={{
+          exitTransform: 'scale(0.5) translateY(-50%)'
+        }}>
+        <Card>
+          <CardImg width="100%" object src={baseUrl + dish.image} alt={dish.name} />
+          <CardBody>
+            <CardTitle>{dish.name}</CardTitle>
+            <CardText>{dish.description}</CardText>
+          </CardBody>
+        </Card>
+      </FadeTransform>
     );
   } else {
     return <div></div>;
@@ -44,7 +50,7 @@ function RenderComments({ comments }) {
   if (comments) {
     c = comments.map((x) => {
       return (
-        <ul key={x.id} className="list-unstyled">
+        <Fade in>
           <li>{x.comment}</li>
           <li>
             --{x.author},{" "}
@@ -54,13 +60,19 @@ function RenderComments({ comments }) {
               day: "2-digit",
             }).format(new Date(Date.parse(x.date)))}
           </li>
-        </ul>
+        </Fade>
       );
     });
     return (
       <div>
         <h4>Comments</h4>
-        <div>{c}</div>
+        <div class>
+          <ul className="list-unstyled">
+            <Stagger in >
+              {c}
+            </Stagger>
+          </ul>
+        </div>
       </div>
     );
   } else {
