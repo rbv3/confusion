@@ -13,6 +13,7 @@ import {
   fetchDishes,
   fetchComments,
   fetchPromos,
+  postFeedback,
 } from "../redux/ActionCreators";
 import { actions } from "react-redux-form";
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -42,6 +43,9 @@ const mapDispatchToProps = (dispatch) => ({
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
   },
+  postFeedback: (firstName, lastName, contactType, telNum, message, email, agree) => {
+    dispatch(postFeedback(firstName, lastName, contactType, telNum, message, email, agree));
+  }
 });
 
 class Main extends Component {
@@ -111,7 +115,7 @@ class Main extends Component {
                 exact
                 path="/contactus"
                 component={() => (
-                  <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
+                  <Contact resetFeedbackForm={this.props.resetFeedbackForm}  postFeedback={this.props.postFeedback} />
                 )}
               />
               <Redirect to="/home" />

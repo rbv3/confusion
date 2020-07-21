@@ -24,8 +24,10 @@ class Contact extends Component {
   }
 
   handleSubmit(values) {
+    console.log(values)
+    this.props.postFeedback(values.firstName, values.lastName, values.contactType, values.telNum, values.message, values.email, values.agree);
     console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
+    // alert("Current State is: " + JSON.stringify(values));
     this.props.resetFeedbackForm();
   }
 
@@ -96,13 +98,13 @@ class Contact extends Component {
             <div className="col-12 col-md-9">
               <Form model="feedback" onSubmit={(values) => this.handleSubmit(values)}>
                 <Row className="form-group">
-                  <Label htmlFor="firstname" md={2}>
+                  <Label htmlFor="firstName" md={2}>
                     First Name
                   </Label>
                   <Col md={10}>
                     <Control.text
-                      model=".firstname"
-                      id="firstname"
+                      model=".firstName"
+                      id="firstName"
                       name="firstName"
                       placeholder="First Name"
                       className="form-control"
@@ -112,7 +114,7 @@ class Contact extends Component {
                     />
                     <Errors
                       className="text-danger"
-                      model=".firstname"
+                      model=".firstName"
                       show="touched"
                       messages={{
                         required: 'Required',
@@ -123,13 +125,13 @@ class Contact extends Component {
                   </Col>
                 </Row>
                 <Row className="form-group">
-                  <Label htmlFor="lastname" md={2}>
+                  <Label htmlFor="lastName" md={2}>
                     Last Name{" "}
                   </Label>
                   <Col md={10}>
                     <Control.text
-                      model=".lastname"
-                      id="lastname"
+                      model=".lastName"
+                      id="lastName"
                       name="lastName"
                       placeholder="Last Name"
                       className="form-control"
@@ -139,7 +141,7 @@ class Contact extends Component {
                     />
                     <Errors
                       className="text-danger"
-                      model=".lastname"
+                      model=".lastName"
                       show="touched"
                       messages={{
                         required: 'Required',
@@ -150,12 +152,12 @@ class Contact extends Component {
                   </Col>
                 </Row>
                 <Row className="form-group">
-                  <Label htmlFor="telnum" md={2}>
+                  <Label htmlFor="Num" md={2}>
                     Contact Tel.
                   </Label>
                   <Col md={10}>
                     <Control.text
-                      model=".telnum"
+                      model=".telNum"
                       name="telNum"
                       placeholder="Tel. Number"
                       className="form-control"
@@ -165,7 +167,7 @@ class Contact extends Component {
                     />
                     <Errors
                       className="text-danger"
-                      model=".telnum"
+                      model=".telNum"
                       show="touched"
                       messages={{
                         required: 'Required',

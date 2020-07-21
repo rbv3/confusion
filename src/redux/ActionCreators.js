@@ -163,3 +163,50 @@ export const addPromos = (promos) => ({
   type: ActionTypes.ADD_PROMOS,
   payload: promos,
 });
+
+export const addFeedback = (feedback) => (
+  console.log(feedback)
+)
+
+export const postFeedback = (firstName, lastName, contactType, telNum, message, email, agree) => (dispatch) => {
+  let newFeedback = {
+    firstName: firstName,
+    lastName: lastName,
+    contactType: contactType,
+    telNum: telNum,
+    message: message,
+    email: email,
+    agree: agree,
+  }
+  console.log(newFeedback)
+  return fetch(baseUrl + 'feedback', {
+    method: 'POST',
+    body: JSON.stringify(newFeedback),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'same-origin',
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response;
+      }
+      else {
+        var error = new Error(
+          "Error " + response.status + ": " + response.statusText
+        );
+        error.response = response;
+        throw error;
+      }
+    },
+      error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      })
+    .then(response => response.json())
+    .then(response => alert(JSON.stringify(response)))
+    .catch(error => {
+      console.log('Post comments ', error.message);
+      alert('Your comment could not be posted\n Error ' + error.message);
+    });
+}
